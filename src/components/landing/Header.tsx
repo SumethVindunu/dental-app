@@ -1,11 +1,12 @@
 "use client";
 
-import { SignInButton, SignUpButton, useUser, UserButton } from "@clerk/nextjs";
+import { SignInButton, SignUpButton, UserButton, useUser } from "@clerk/nextjs";
+import { MenuIcon, XIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "../ui/button";
 import { useState } from "react";
-import { MenuIcon, XIcon } from "lucide-react";
+import ThemeToggle from "../theme-toggle";
+import { Button } from "../ui/button";
 
 function Header() {
   const { isSignedIn, user } = useUser();
@@ -16,28 +17,46 @@ function Header() {
       <div className="max-w-6xl mx-auto flex justify-between items-center h-full">
         {/* LOGO */}
         <Link href="/" className="flex items-center gap-2 shrink-0">
-          <Image src={"/logo.png"} alt="DentWise Logo" width={32} height={32} className="w-9 sm:w-11" />
+          <Image
+            src={"/logo.png"}
+            alt="DentWise Logo"
+            width={32}
+            height={32}
+            className="w-9 sm:w-11"
+          />
           <span className="font-semibold text-base sm:text-lg">Dental App</span>
         </Link>
 
         {/* DESKTOP NAV */}
         <div className="hidden md:flex items-center gap-8">
-          <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+          <a
+            href="#"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
             How it Works
           </a>
-          <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+          <a
+            href="#"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
             Pricing
           </a>
-          <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+          <a
+            href="#"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
             About
           </a>
         </div>
 
         {/* DESKTOP AUTH / USER */}
         <div className="hidden md:flex items-center gap-3">
+          <ThemeToggle />
           {isSignedIn ? (
             <>
-              <span className="text-sm text-muted-foreground">{user?.fullName}</span>
+              <span className="text-sm text-muted-foreground">
+                {user?.fullName}
+              </span>
               <UserButton />
             </>
           ) : (
@@ -56,6 +75,7 @@ function Header() {
 
         {/* MOBILE: Auth buttons + hamburger */}
         <div className="flex md:hidden items-center gap-2">
+          <ThemeToggle />
           {isSignedIn ? (
             <UserButton />
           ) : (
@@ -92,7 +112,6 @@ function Header() {
           {/* Drawer panel */}
           <div className="fixed top-16  right-0 bottom-0 w-64 max-w-[80vw] bg-background border-l border-border shadow-xl md:hidden flex flex-col z-50 animate-in slide-in-from-right ">
             <div className="flex flex-col gap-1 p-6 pt-8 bg-black/40 rounded-2xl ">
-                 
               <a
                 href="#"
                 className="px-4 py-3 rounded-lg  text-foreground font-medium hover:bg-muted transition-colors"
@@ -120,12 +139,19 @@ function Header() {
               {!isSignedIn && (
                 <div className="flex flex-col gap-2">
                   <SignInButton mode="modal">
-                    <Button variant={"outline"} className="w-full" onClick={() => setMobileMenuOpen(false)}>
+                    <Button
+                      variant={"outline"}
+                      className="w-full"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
                       Login
                     </Button>
                   </SignInButton>
                   <SignUpButton mode="modal">
-                    <Button className="w-full" onClick={() => setMobileMenuOpen(false)}>
+                    <Button
+                      className="w-full"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
                       Sign Up
                     </Button>
                   </SignUpButton>
