@@ -4,6 +4,7 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import ThemeProvider from "@/components/theme-provider";
 import UserSync from "@/components/UserSync";
+import TanStackProvider from "@/components/providers/TanStackProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,38 +27,40 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider
-      appearance={{
-        variables: {
-          colorBackground: "#111111",
-          colorForeground: "#eeeeee",
-          colorPrimary: "#ffe0c2",
-          colorPrimaryForeground: "#081a1b",
-          colorInput: "#222222",
-          colorInputForeground: "#eeeeee",
-          colorMuted: "#222222",
-          colorMutedForeground: "#b4b4b4",
-          colorNeutral: "#ffffff",
-        },
-      }}
-    >
-      <html
-        lang="en"
-        suppressHydrationWarning
-        className={`${geistSans.variable} ${geistMono.variable} h-full antialiased `}
+    <TanStackProvider>
+      <ClerkProvider
+        appearance={{
+          variables: {
+            colorBackground: "#111111",
+            colorForeground: "#eeeeee",
+            colorPrimary: "#ffe0c2",
+            colorPrimaryForeground: "#081a1b",
+            colorInput: "#222222",
+            colorInputForeground: "#eeeeee",
+            colorMuted: "#222222",
+            colorMutedForeground: "#b4b4b4",
+            colorNeutral: "#ffffff",
+          },
+        }}
       >
-        <body className="min-h-full flex flex-col">
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <UserSync/>
-            {children}
-          </ThemeProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+        <html
+          lang="en"
+          suppressHydrationWarning
+          className={`${geistSans.variable} ${geistMono.variable} h-full antialiased `}
+        >
+          <body className="min-h-full flex flex-col">
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <UserSync />
+              {children}
+            </ThemeProvider>
+          </body>
+        </html>
+      </ClerkProvider>
+    </TanStackProvider>
   );
 }

@@ -17,7 +17,7 @@ export default async  function Home() {
   await syncUser();
 
   // redirect auth user to dashboard
-  if (user) redirect("/dashbord");
+  if (user) redirect("/dashboard");
   return (
     <div className="min-h-screen bg-background">
       <Header/>
