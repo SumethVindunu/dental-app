@@ -136,7 +136,7 @@ function Hero() {
               <div className="absolute -bottom-6 -right-6 w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br from-primary/15 to-primary/5 rounded-full blur-2xl"></div>
 
               <Image
-                src={"/hero.png"}
+                src={"/Hero.png"}
                 alt="DentWise AI"
                 width={500}
                 height={500}
