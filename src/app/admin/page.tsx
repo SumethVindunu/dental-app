@@ -13,7 +13,7 @@ async function AdminPage() {
 
     const adminEmail = process.env.ADMIN_EMAIL;
     const userEmail = user.emailAddresses[0]?.emailAddress;
-    console.log(adminEmail , userEmail)
+    // console.log(adminEmail , userEmail)
 
     if (!adminEmail || userEmail !== adminEmail) redirect("/dashboard");
 
